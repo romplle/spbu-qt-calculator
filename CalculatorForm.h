@@ -5,16 +5,29 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QVBoxLayout>
 
 class CalculatorForm : public QMainWindow {
     Q_OBJECT
 public:
-    CalculatorForm(QWidget *parent = nullptr);
+    explicit CalculatorForm(QWidget *parent = nullptr);
+
+private slots:
+    void onDigitClicked();
+    void onOperatorClicked();
+    void onEqualClicked();
+    void onClearClicked();
 
 private:
-    QLineEdit *display;
+    QLineEdit *currentExpression;
+    QLineEdit *lastOperation;
+    QLineEdit *resultDisplay;
     QGridLayout *gridLayout;
     QWidget *centralWidget;
+
+    QString currentOperator;
+    double leftOperand;
+    bool waitingForOperand;
 
     void createLayout();
 };
